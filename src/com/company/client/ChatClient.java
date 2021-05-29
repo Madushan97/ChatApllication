@@ -1,7 +1,6 @@
-package com.company;
+package com.company.client;
 
 import java.io.*;
-import java.net.Socket;
 
 public class ChatClient {
 

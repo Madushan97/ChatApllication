@@ -1,32 +1,18 @@
-package com.company;
+package com.company.server;
 
 import java.io.*;
-import java.net.ServerSocket;
 import java.net.Socket;
-import java.sql.SQLOutput;
 
-public class Server {
+public class ClientHandler implements Runnable {
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+    private Socket client;
+        public ClientHandler(Socket socket) {
+        this.client = socket;
+    }
+    @Override
+    public void run() {
 
-//checking main class is working properly
-        System.out.println("Server is running...");
-
-//create a server socket
-        int port;
-        ServerSocket serverSocket = new ServerSocket(6000);
-        System.out.println("Server socket created...");
-
-        while(true){
-            //server is running forever...
-
-
-//accept the connection from client. will wait until a client connects
-//        listening state
-            Socket client = serverSocket.accept();
-
-            System.out.println("Server accepted a client");
-
+        try {
             Thread.sleep(30000);    //wait foe 30 second before  executing the rest of the code
 
 //getting data
@@ -38,11 +24,8 @@ public class Server {
 //        read again and again until inputData null(continous reading data from client)
             String inputData;
             while ((inputData = bufferedReader.readLine()) != null){
-
                 System.out.println("client says:" + inputData);
-
                 //send data to client
-
                 switch (inputData){
                     case "hello From the client.":
                         OutputStream.writeBytes("Hello from the server...\n");
@@ -56,38 +39,24 @@ public class Server {
                     default:
                         OutputStream.writeBytes("I didn't get it...\n");
                 }
-
                 OutputStream.writeBytes("Hello from the server...\n");
-
                 if(inputData.equals("exit")){
                     break;
                 }
 
             }
-
 //        going to send some data server to client
 //
-//
+                this.client.close();
 
-            client.close();
-
+        } catch (InterruptedException | IOException e) {
+            e.printStackTrace();
         }
 
-//        InputStream and OutputStream
-
-//        send data to the server
-
-//        send data both ways
-
-//        server sends data according to the client input
-
-//        get the user input and sending the data to the server
-
-//        handling multiple clients at the same time -using
-
-
-
-
-
     }
+
+    //two ways to create a thread in java
+    //1. Extend a class using thread super class
+    //2. implement a class using runnable interface.
+
 }
