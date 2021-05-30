@@ -9,6 +9,9 @@ public class Server {
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
+        Chat_Server Chat_Server = new Chat_Server();
+        Chat_Server.setVisible(true);
+
 //checking main class is working properly
         System.out.println("Server is running...");
 

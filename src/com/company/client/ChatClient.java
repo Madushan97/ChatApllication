@@ -1,10 +1,23 @@
 package com.company.client;
 
+import javax.swing.*;
 import java.io.*;
 
 public class ChatClient {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+
+        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+
+
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                        Chat_Client Chat_Client = new Chat_Client();
+                        Chat_Client.setVisible(true);
+            }
+        });
+
 
         Client client = new Client();
         client.start();
